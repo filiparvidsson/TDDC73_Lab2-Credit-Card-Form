@@ -33,12 +33,14 @@ export default function Form() {
             keyboardType="numeric"
             onFocus={() => setSelectedInput('cardNumber')}
             onChangeText={(text) => setCardInput(text)}
+            maxLength={16}
             />
             <Text style={styles.formTitle}>Card Name</Text>
             <TextInput
             style={styles.formInput}
             onFocus={() => setSelectedInput('cardName')}
             onChangeText={(text) => setCardName(text)}
+            maxLength={20}
             />
             <Text style={styles.formTitle}
             >CVV</Text>
@@ -47,6 +49,8 @@ export default function Form() {
             keyboardType="numeric"
             onFocus={() => setSelectedInput('cardCVV')}
             onChangeText={(text) => setCardCVV(text)}
+            // if the first number 3(amex) then show 4 digits, otherwise show 3 digits
+            maxLength={cardInput[0] === '3' ? 4 : 3}
              />
             <Text style={styles.formTitle}>Expiration Date</Text>
             <View style={styles.formPicker}>

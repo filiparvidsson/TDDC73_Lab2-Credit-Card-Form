@@ -41,16 +41,33 @@ export default function CreditCard({ cardNumber, cardName, cardMonth, cardYear, 
         if (cardNumber[0] === '4') {
             // get the image from the assetdirectory
             return require('../../assets/visa.png');
-        } else if (cardNumber[0] === '5') {
+        }
+        else if(cardNumber[0] === '3' && cardNumber[1] === '0' ) {
+            return require('../../assets/dinersclub.png');
+        }
+        else if (cardNumber[0] === '5') {
             return require('../../assets/mastercard.png');
         } else if (cardNumber[0] === '3') {
             return require('../../assets/amex.png');
-        } else {
+        }
+        else if (cardNumber[0] === '6') {
+            return require('../../assets/discover.png');
+        }
+        
+        else {
             return require('../../assets/Gringotts.png');
         }
     }
 
-    // return a style which makes the text blue if the input is selected
+    // return the mean value of the card number
+    const cardMean = (cardNumber) => {
+        let sum = 0;
+        for (let i = 0; i < cardNumber.length; i++) {
+            sum += parseInt(cardNumber[i] );
+        }
+        // return and int that has to be between 1 and 9
+        return Math.floor(sum) % 10;
+    }
     
 
     // return different if selectedInput is cardCVV
@@ -58,6 +75,7 @@ export default function CreditCard({ cardNumber, cardName, cardMonth, cardYear, 
         
     return (
         <View style={styles.container}>
+
         <Image source={cardType(cardNumber)} style={styles.cardType} />
         <Text style={[styles.cardNumberTitle,
         /*if selected item is cardNumber, make the font glow*/
